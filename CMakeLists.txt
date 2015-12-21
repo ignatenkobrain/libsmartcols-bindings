@@ -2,6 +2,18 @@ cmake_minimum_required(VERSION 3.4)
 
 project (libsmartcols-bindings CXX)
 
+foreach (lang "Python"
+              "Perl")
+  string (TOUPPER "${lang}" LANG)
+  option (ENABLE_${LANG} "Enable ${lang} interface" OFF)
+
+  if (ENABLE_${LANG})
+    message (STATUS " +++ ${lang} bindings enabled")
+  else ()
+    message (STATUS " --- ${lang} bindings disabled")
+  endif ()
+endforeach ()
+
 find_package (PkgConfig REQUIRED)
 pkg_check_modules (SCOLS smartcols REQUIRED)
 include_directories (${SCOLS_INCLUDE_DIRS})
@@ -14,18 +26,6 @@ check_symbol_exists (SCOLS_FL_HIDDEN libmsartcols.h FLAGS_HIDDEN)
 
 set (SWIG_INPUT "${CMAKE_SOURCE_DIR}/smartcols.i")
 set_source_files_properties (${SWIG_INPUT} PROPERTIES CPLUSPLUS ON)
-
-foreach (lang "Python"
-              "Perl")
-  string (TOUPPER "${lang}" LANG)
-  option (ENABLE_${LANG} "Enable ${lang} interface" OFF)
-
-  if (ENABLE_${LANG})
-    message (STATUS " +++ ${lang} bindings enabled")
-  else ()
-    message (STATUS " --- ${lang} bindings disabled")
-  endif ()
-endforeach ()
 
 macro (_enable_language LANG LIBRARIES)
   set (target_name bindings_${LANG})
