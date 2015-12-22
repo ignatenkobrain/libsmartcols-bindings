@@ -16,6 +16,8 @@ Add one of options to build specific languages:
 * Perl: `-DENABLE_PERL=ON`
 * Lua: `-DENABLE_LUA=ON`
 
+Forcing python version: `-DPythonLibs_FIND_VERSION=2 -DPythonLibs_FIND_VERSION_MAJOR=2`
+
 To init libsmartcols debug when loading module, add: `-DCMAKE_BUILD_TYPE=Debug`
 
 Running examples
