@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required (VERSION 3.4)
 
 project (libsmartcols-bindings CXX)
 
@@ -57,7 +57,7 @@ if (ENABLE_PYTHON)
   message (STATUS "Python installation dir: ${PYTHON_INSTALL_DIR}")
 
   _enable_language (python ${PYTHON_LIBRARIES})
-  set_target_properties(${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES OUTPUT_NAME "_smartcols")
+  set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES OUTPUT_NAME "_smartcols")
 
   install (TARGETS ${SWIG_MODULE_${target_name}_REAL_NAME}
            DESTINATION ${PYTHON_INSTALL_DIR})
@@ -71,8 +71,8 @@ if (ENABLE_PERL)
   message (STATUS "Perl installation dir: ${PERL_VENDORARCH}")
 
   _enable_language (perl ${PERL_LIBRARY})
-  set_target_properties(${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES PREFIX "")
-  set_target_properties(${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES OUTPUT_NAME "smartcols")
+  set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES PREFIX "")
+  set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES OUTPUT_NAME "smartcols")
 
   install (TARGETS ${SWIG_MODULE_${target_name}_REAL_NAME}
            DESTINATION ${PERL_VENDORARCH})
@@ -87,8 +87,8 @@ if (ENABLE_LUA)
   message (STATUS "Lua installation dir: ${LUA_INSTALL_DIR}")
 
   _enable_language (lua "${LUA_LIBRARIES}")
-  set_target_properties(${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES PREFIX "")
-  set_target_properties(${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES OUTPUT_NAME "smartcols")
+  set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES PREFIX "")
+  set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES OUTPUT_NAME "smartcols")
 
   install (TARGETS ${SWIG_MODULE_${target_name}_REAL_NAME}
            DESTINATION ${LUA_INSTALL_DIR})
