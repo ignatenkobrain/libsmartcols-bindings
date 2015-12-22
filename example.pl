@@ -13,6 +13,10 @@ $tb->add_column($cl_name);
 $cl_age = $tb->new_column("AGE", 2);
 $cl_age->right(true);
 
+print "Enable colors: " . $tb->{colors} . "\n";
+$tb->{colors} = true;
+print "Enable colors: " . $tb->{colors} . "\n";
+
 $ln = $gdad = $tb->new_line();
 $ln->set_data(name, "Grandfather Bob");
 $ln->set_data(age, "61");

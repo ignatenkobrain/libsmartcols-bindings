@@ -33,7 +33,31 @@
 #define PROP(param)
 #define PROP_FOOTER(class)
 
-#ifdef SWIGLUA
+#if defined(SWIGPYTHON)
+#undef PROP
+%define PROP(param)
+    %pythoncode %{
+        __swig_getmethods__[#param] = param
+        __swig_setmethods__[#param] = param
+        if _newclass: param = property(param, param)
+    %}
+%enddef
+#elif defined(SWIGPERL)
+#undef PROP_HEADER
+%define PROP_HEADER(class, ...)
+    %perlcode %{
+        package smartcols:: ## class;
+    %}
+%enddef
+
+#undef PROP
+%define PROP(param)
+    %perlcode %{
+        *swig_ ## param ## _get = * ## param;
+        *swig_ ## param ## _set = * ## param;
+    %}
+%enddef
+#elif defined(SWIGLUA)
 #define SWIG_DOSTRING_FAIL(STR)
 
 #undef PROP_HEADER
@@ -61,17 +85,8 @@
         __fixup_ ## class()
     %}
 %enddef
-#endif
-
-#ifdef SWIGPYTHON
-#undef PROP
-%define PROP(param)
-    %pythoncode %{
-        __swig_getmethods__[#param] = param
-        __swig_setmethods__[#param] = param
-        if _newclass: param = property(param, param)
-    %}
-%enddef
+#else
+#warning "No property header/footer/etc. for target language"
 #endif
 
 %include "exception.i"
