@@ -119,53 +119,21 @@ class Column {
 %}
 
 %extend Column {
-#ifdef SWIGPYTHON
-    %pythoncode %{
-        __swig_getmethods__["trunc"] = trunc
-        __swig_setmethods__["trunc"] = trunc
-        if _newclass: trunc = property(trunc, trunc)
+PROP_HEADER(Column, "")
 
-        __swig_getmethods__["tree"] = tree
-        __swig_setmethods__["tree"] = tree
-        if _newclass: tree = property(tree, tree)
-
-        __swig_getmethods__["right"] = right
-        __swig_setmethods__["right"] = right
-        if _newclass: right = property(right, right)
-
-        __swig_getmethods__["strict_width"] = strict_width
-        __swig_setmethods__["strict_width"] = strict_width
-        if _newclass: strict_width = property(strict_width, strict_width)
-
-        __swig_getmethods__["noextremes"] = noextremes
-        __swig_setmethods__["noextremes"] = noextremes
-        if _newclass: noextremes = property(noextremes, noextremes)
-    %}
-#endif
+PROP(trunc)
+PROP(tree)
+PROP(right)
+PROP(strict_width)
+PROP(noextremes)
 
 #ifdef FLAGS_HIDDEN
-#ifdef SWIGPYTHON
-    %pythoncode %{
-        __swig_getmethods__["hidden"] = hidden
-        __swig_setmethods__["hidden"] = hidden
-        if _newclass: hidden = property(hidden, hidden)
-    %}
-#endif
+PROP(hidden)
 #endif
 
-#ifdef SWIGPYTHON
-    %pythoncode %{
-        __swig_getmethods__["name"] = name
-        __swig_setmethods__["name"] = name
-        if _newclass: name = property(name, name)
+PROP(name)
+PROP(color)
+PROP(whint)
 
-        __swig_getmethods__["color"] = color
-        __swig_setmethods__["color"] = color
-        if _newclass: color = property(color, color)
-
-        __swig_getmethods__["whint"] = whint
-        __swig_setmethods__["whint"] = whint
-        if _newclass: whint = property(whint, whint)
-    %}
-#endif
+PROP_FOOTER(Column)
 }

@@ -28,6 +28,51 @@
 #include <libsmartcols.h>
 %}
 
+#define PROP_HEADER(class, ...)
+#define PROP(param)
+#define PROP_FOOTER(class)
+
+#ifdef SWIGLUA
+#define SWIG_DOSTRING_FAIL(STR)
+
+#undef PROP_HEADER
+%define PROP_HEADER(class, ...)
+    %luacode %{
+        function __fixup_ ## class()
+            local obj = smartcols. ## class(## __VA_ARGS__)
+            local mt = getmetatable(obj)
+    %}
+%enddef
+
+#undef PROP
+%define PROP(param)
+    %luacode %{
+        __ ## param = obj. ## param
+        mt[".get"][#param] = __ ## param
+        mt[".set"][#param] = __ ## param
+    %}
+%enddef
+
+#undef PROP_FOOTER
+%define PROP_FOOTER(class)
+    %luacode %{
+        end
+        __fixup_ ## class()
+    %}
+%enddef
+#endif
+
+#ifdef SWIGPYTHON
+#undef PROP
+%define PROP(param)
+    %pythoncode %{
+        __swig_getmethods__[#param] = param
+        __swig_setmethods__[#param] = param
+        if _newclass: param = property(param, param)
+    %}
+%enddef
+#endif
+
 %include "exception.i"
 
 %inline %{

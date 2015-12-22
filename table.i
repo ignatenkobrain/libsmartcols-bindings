@@ -25,6 +25,13 @@
 class Table {
     private:
         struct libscols_table *tb = NULL;
+        bool json() const {
+            return (bool) scols_table_is_json(this->tb);
+        }
+        void json(bool json) {
+            HANDLE_RC(scols_table_enable_json(this->tb, (int) json));
+        }
+
     public:
         Table() {
             this->tb = scols_new_table();
@@ -37,7 +44,7 @@ class Table {
             HANDLE_RC(scols_print_table_to_string(this->tb, &data));
             return data;
         }
-#ifdef SWIGPYTHON
+#if defined(SWIGPYTHON) || defined(SWIGLUA)
         char *__json() {
             this->json(true);
             char *data = this->__str__();
@@ -62,13 +69,6 @@ class Table {
         }
         void colors(bool colors) {
             HANDLE_RC(scols_table_enable_colors(this->tb, (int) colors));
-        }
-
-        bool json() const {
-            return (bool) scols_table_is_json(this->tb);
-        }
-        void json(bool json) {
-            HANDLE_RC(scols_table_enable_json(this->tb, (int) json));
         }
 
         bool maxout() const {
@@ -128,35 +128,32 @@ class Table {
 %}
 
 %extend Table {
+PROP_HEADER(Table)
+
+PROP(ascii)
+PROP(colors)
+
+#ifdef SWIGLUA
+    %luacode %{
+        function smartcols.Table:__tojson()
+            local json = require('json')
+            return json.encode(json.decode(self:__json()))
+        end
+        mt[".fn"]["json"] = smartcols.Table.__tojson
+    %}
+#endif
 #ifdef SWIGPYTHON
     %pythoncode %{
-        __swig_getmethods__["ascii"] = ascii
-        __swig_setmethods__["ascii"] = ascii
-        if _newclass: ascii = property(ascii, ascii)
-
-        __swig_getmethods__["colors"] = colors
-        __swig_setmethods__["colors"] = colors
-        if _newclass: colors = property(colors, colors)
-
         def json(self):
             from json import loads
             return loads(self.__json())
-
-        __swig_getmethods__["maxout"] = maxout
-        __swig_setmethods__["maxout"] = maxout
-        if _newclass: maxout = property(maxout, maxout)
-
-        __swig_getmethods__["noheadings"] = noheadings
-        __swig_setmethods__["noheadings"] = noheadings
-        if _newclass: noheadings = property(noheadings, noheadings)
-
-        __swig_getmethods__["column_separator"] = column_separator
-        __swig_setmethods__["column_separator"] = column_separator
-        if _newclass: column_separator = property(column_separator, column_separator)
-
-        __swig_getmethods__["line_separator"] = line_separator
-        __swig_setmethods__["line_separator"] = line_separator
-        if _newclass: line_separator = property(line_separator, line_separator)
     %}
 #endif
+
+PROP(maxout)
+PROP(noheadings)
+PROP(column_separator)
+PROP(line_separator)
+
+PROP_FOOTER(Table)
 }

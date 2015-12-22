@@ -60,19 +60,11 @@ public:
 %}
 
 %extend Symbols {
-#ifdef SWIGPYTHON
-    %pythoncode %{
-        __swig_getmethods__["branch"] = branch
-        __swig_setmethods__["branch"] = branch
-        if _newclass: branch = property(branch, branch)
+PROP_HEADER(Symbols)
 
-        __swig_getmethods__["right"] = right
-        __swig_setmethods__["right"] = right
-        if _newclass: right = property(right, right)
+PROP(branch)
+PROP(right)
+PROP(vertical)
 
-        __swig_getmethods__["vertical"] = vertical
-        __swig_setmethods__["vertical"] = vertical
-        if _newclass: vertical = property(vertical, vertical)
-    %}
-#endif
+PROP_FOOTER(Symbols)
 }

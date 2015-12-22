@@ -3,7 +3,8 @@ cmake_minimum_required(VERSION 3.4)
 project (libsmartcols-bindings CXX)
 
 foreach (lang "Python"
-              "Perl")
+              "Perl"
+              "Lua")
   string (TOUPPER "${lang}" LANG)
   option (ENABLE_${LANG} "Enable ${lang} interface" OFF)
 
@@ -78,3 +79,17 @@ if (ENABLE_PERL)
   install (FILES ${swig_extra_generated_files}
            DESTINATION ${PERL_VENDORARCH})
 endif (ENABLE_PERL)
+
+if (ENABLE_LUA)
+  find_package (Lua REQUIRED)
+  include_directories (${LUA_INCLUDE_DIR})
+  set (LUA_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/lua/${LUA_VERSION_MAJOR}.${LUA_VERSION_MINOR})
+  message (STATUS "Lua installation dir: ${LUA_INSTALL_DIR}")
+
+  _enable_language (lua "${LUA_LIBRARIES}")
+  set_target_properties(${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES PREFIX "")
+  set_target_properties(${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES OUTPUT_NAME "smartcols")
+
+  install (TARGETS ${SWIG_MODULE_${target_name}_REAL_NAME}
+           DESTINATION ${LUA_INSTALL_DIR})
+endif (ENABLE_LUA)
