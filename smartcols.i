@@ -18,14 +18,15 @@
 
 %module(docstring="Python API for the util-linux libsmartcols library") smartcols
 
+%{
+#define SWIG_FILE_WITH_INIT
+#include <libsmartcols.h>
+%}
+
 %init %{
 #ifdef DEBUG
     scols_init_debug(0xffff);
 #endif
-%}
-
-%{
-#include <libsmartcols.h>
 %}
 
 #define PROP_HEADER(class, ...)
