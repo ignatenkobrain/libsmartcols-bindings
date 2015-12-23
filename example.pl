@@ -7,15 +7,20 @@ use constant {
     age  => 1,
 };
 
+sub colors_enabled {
+    our $tb = shift;
+    return $tb->{colors} ? "True" : "False";
+}
+
 $cl_name = new smartcols::Column("NAME", 0.1, tree => true);
 $tb->add_column($cl_name);
 
 $cl_age = $tb->new_column("AGE", 2);
 $cl_age->right(true);
 
-print "Enable colors: " . $tb->{colors} . "\n";
-$tb->{colors} = true;
-print "Enable colors: " . $tb->{colors} . "\n";
+print "Enable colors: " . colors_enabled($tb) . "\n";
+$tb->{colors} = 1;
+print "Enable colors: " . colors_enabled($tb) . "\n";
 
 $ln = $gdad = $tb->new_line();
 $ln->set_data(name, "Grandfather Bob");
