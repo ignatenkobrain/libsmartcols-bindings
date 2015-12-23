@@ -1,6 +1,19 @@
 Bindings for libsmartcols
 =========================
 
+Build Requirements
+------------------
+
+* [CMake](https://cmake.org/)
+* [SWIG](http://swig.org/)
+
+Requirements
+------------
+
+Optional requirements for `json()` function support:
+* Perl: [perl-JSON](http://search.cpan.org/dist/JSON/)
+* Lua: [lua-json](http://luaforge.net/projects/luajson/)
+
 Building
 --------
 
