@@ -28,7 +28,7 @@ check_symbol_exists (SCOLS_FL_HIDDEN libmsartcols.h FLAGS_HIDDEN)
 set (SWIG_INPUT "${CMAKE_SOURCE_DIR}/smartcols.i")
 set_source_files_properties (${SWIG_INPUT} PROPERTIES CPLUSPLUS ON)
 
-macro (_enable_language LANG LIBRARIES)
+macro (enable_language LANG LIBRARIES)
   set (target_name bindings_${LANG})
   set (CMAKE_SWIG_OUTDIR "${CMAKE_BINARY_DIR}/${LANG}")
   swig_add_module (${target_name} ${LANG} ${SWIG_INPUT})
@@ -36,22 +36,22 @@ macro (_enable_language LANG LIBRARIES)
   target_compile_features (${SWIG_MODULE_${target_name}_REAL_NAME} PRIVATE cxx_nonstatic_member_init)
   set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${LANG}")
 
-  set (_FLAGS CACHE INTERNAL "" FORCE)
+  set (ADD_FLAGS CACHE INTERNAL "" FORCE)
   if (FLAGS_HIDDEN)
-    set (_FLAGS "${_FLAGS} -DFLAGS_HIDDEN")
+    set (ADD_FLAGS "${ADD_FLAGS} -DFLAGS_HIDDEN")
   endif ()
   if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set (_FLAGS "${_FLAGS} -DDEBUG")
+    set (ADD_FLAGS "${ADD_FLAGS} -DDEBUG")
   endif ()
   # We need to have some hack till 2.28, otherwise program will crash sometimes
   # https://github.com/karelzak/util-linux/commit/5e8461a53a11b2ed4d4e14a9e912bfad02cb7287
-  pkg_check_modules (_SCOLS_OLDSTREAM smartcols>=2.28 QUIET)
-  if (NOT _SCOLS_OLDSTREAM_FOUND)
-    set (_FLAGS "${_FLAGS} -DOLDSTREAM_HACK")
+  pkg_check_modules (SCOLS_OLDSTREAM smartcols>=2.28 QUIET)
+  if (NOT SCOLS_OLDSTREAM_FOUND)
+    set (ADD_FLAGS "${ADD_FLAGS} -DOLDSTREAM_HACK")
   endif ()
 
-  if (NOT _FLAGS STREQUAL "")
-    set_source_files_properties (${swig_generated_file_fullname} PROPERTIES COMPILE_FLAGS "${_FLAGS}")
+  if (NOT ADD_FLAGS STREQUAL "")
+    set_source_files_properties (${swig_generated_file_fullname} PROPERTIES COMPILE_FLAGS "${ADD_FLAGS}")
   endif ()
 endmacro ()
 
@@ -62,7 +62,7 @@ if (ENABLE_PYTHON)
   execute_process (COMMAND ${PYTHON_EXECUTABLE} -c "from sys import stdout; from distutils import sysconfig; stdout.write(sysconfig.get_python_lib(True))" OUTPUT_VARIABLE PYTHON_INSTALL_DIR)
   message (STATUS "Python installation dir: ${PYTHON_INSTALL_DIR}")
 
-  _enable_language (python ${PYTHON_LIBRARIES})
+  enable_language (python ${PYTHON_LIBRARIES})
   set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES OUTPUT_NAME "_smartcols")
 
   install (TARGETS ${SWIG_MODULE_${target_name}_REAL_NAME}
@@ -76,7 +76,7 @@ if (ENABLE_PERL)
   include_directories (${PERL_INCLUDE_PATH})
   message (STATUS "Perl installation dir: ${PERL_VENDORARCH}")
 
-  _enable_language (perl ${PERL_LIBRARY})
+  enable_language (perl ${PERL_LIBRARY})
   set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES PREFIX "")
   set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES OUTPUT_NAME "smartcols")
 
@@ -92,7 +92,7 @@ if (ENABLE_LUA)
   set (LUA_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/lua/${LUA_VERSION_MAJOR}.${LUA_VERSION_MINOR})
   message (STATUS "Lua installation dir: ${LUA_INSTALL_DIR}")
 
-  _enable_language (lua "${LUA_LIBRARIES}")
+  enable_language (lua "${LUA_LIBRARIES}")
   set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES PREFIX "")
   set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES OUTPUT_NAME "smartcols")
 
