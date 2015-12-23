@@ -43,6 +43,12 @@ macro (_enable_language LANG LIBRARIES)
   if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     set (_FLAGS "${_FLAGS} -DDEBUG")
   endif ()
+  # We need to have some hack till 2.28, otherwise program will crash sometimes
+  # https://github.com/karelzak/util-linux/commit/5e8461a53a11b2ed4d4e14a9e912bfad02cb7287
+  pkg_check_modules (_SCOLS_OLDSTREAM smartcols>=2.28 QUIET)
+  if (NOT _SCOLS_OLDSTREAM_FOUND)
+    set (_FLAGS "${_FLAGS} -DOLDSTREAM_HACK")
+  endif ()
 
   if (NOT _FLAGS STREQUAL "")
     set_source_files_properties (${swig_generated_file_fullname} PROPERTIES COMPILE_FLAGS "${_FLAGS}")

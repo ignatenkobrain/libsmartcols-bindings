@@ -41,22 +41,26 @@ class Table {
         }
         char *__str__() {
             char *data = NULL;
+#ifdef OLDSTREAM_HACK
+            FILE *oldstream = scols_table_get_stream(this->tb);
+#endif
             HANDLE_RC(scols_print_table_to_string(this->tb, &data));
+#ifdef OLDSTREAM_HACK
+            scols_table_set_stream(this->tb, oldstream);
+#endif
             return data;
         }
-#if defined(SWIGPYTHON) || defined(SWIGLUA)
         char *__json() {
             this->json(true);
             char *data = this->__str__();
             this->json(false);
             return data;
         }
-#else
+#if !defined(SWIGPYTHON) && !defined(SWIGLUA)
         void print() {
             HANDLE_RC(scols_print_table(this->tb));
         }
 #endif
-
         bool ascii() const {
             return (bool) scols_table_is_ascii(this->tb);
         }
@@ -133,7 +137,7 @@ PROP_HEADER(Table)
 PROP(ascii)
 PROP(colors)
 
-#ifdef SWIGLUA
+#if defined(SWIGLUA)
     %luacode %{
         function smartcols.Table:__tojson()
             local json = require('json')
@@ -141,13 +145,23 @@ PROP(colors)
         end
         mt[".fn"]["json"] = smartcols.Table.__tojson
     %}
-#endif
-#ifdef SWIGPYTHON
+#elif defined(SWIGPYTHON)
     %pythoncode %{
         def json(self):
             from json import loads
             return loads(self.__json())
     %}
+#elif defined(SWIGPERL)
+    %perlcode %{
+        sub json {
+            use JSON;
+            my $self = shift;
+            my $json = decode_json $self->__json();
+            return $json;
+        }
+    %}
+#else
+#warning "No json() for target language"
 #endif
 
 PROP(maxout)
