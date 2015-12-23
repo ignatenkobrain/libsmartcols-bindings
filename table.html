@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Table &mdash; libsmartcols-bindings 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="libsmartcols-bindings 0.0.1 documentation" href="index.html" />
+    <link rel="next" title="Column" href="column.html" />
+    <link rel="prev" title="Python bindings for libsmartcols" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="table">
+<h1>Table<a class="headerlink" href="#table" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="smartcols.Table">
+<em class="property">class </em><code class="descclassname">smartcols.</code><code class="descname">Table</code><span class="sig-paren">(</span><em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#smartcols.Table" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The name of table (<a class="reference internal" href="#smartcols.Table.name" title="smartcols.Table.name"><code class="xref py py-attr docutils literal"><span class="pre">name</span></code></a>)</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="smartcols.Table.name">
+<code class="descname">name</code><a class="headerlink" href="#smartcols.Table.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the table (for example, used for JSON top level object name).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="smartcols.Table.ascii">
+<code class="descname">ascii</code><a class="headerlink" href="#smartcols.Table.ascii" title="Permalink to this definition">¶</a></dt>
+<dd><p>Force the library to use ASCII chars for the
+<a class="reference internal" href="column.html#smartcols.Column" title="smartcols.Column"><code class="xref py py-class docutils literal"><span class="pre">smartcols.Column</span></code></a> with
+<a class="reference internal" href="column.html#smartcols.Column.tree" title="smartcols.Column.tree"><code class="xref py py-attr docutils literal"><span class="pre">smartcols.Column.tree</span></code></a> activated.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="smartcols.Table.colors">
+<code class="descname">colors</code><a class="headerlink" href="#smartcols.Table.colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable/disable colors.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="smartcols.Table.maxout">
+<code class="descname">maxout</code><a class="headerlink" href="#smartcols.Table.maxout" title="Permalink to this definition">¶</a></dt>
+<dd><p>The extra space after last column is ignored by default. The output
+maximization use the extra space for all columns.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="smartcols.Table.noheadings">
+<code class="descname">noheadings</code><a class="headerlink" href="#smartcols.Table.noheadings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable/disable header line.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="smartcols.Table.column_separator">
+<code class="descname">column_separator</code><a class="headerlink" href="#smartcols.Table.column_separator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Column separator.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="smartcols.Table.line_separator">
+<code class="descname">line_separator</code><a class="headerlink" href="#smartcols.Table.line_separator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Line separator.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="smartcols.Table.new_column">
+<code class="descname">new_column</code><span class="sig-paren">(</span><em>name</em>, <em>whint</em><span class="sig-paren">)</span><a class="headerlink" href="#smartcols.Table.new_column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates new column and adds to table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Title</li>
+<li><strong>whint</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Width hint</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Column</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="column.html#smartcols.Column" title="smartcols.Column">smartcols.Column</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="smartcols.Table.add_column">
+<code class="descname">add_column</code><span class="sig-paren">(</span><em>column</em><span class="sig-paren">)</span><a class="headerlink" href="#smartcols.Table.add_column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds column to table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>column</strong> (<a class="reference internal" href="column.html#smartcols.Column" title="smartcols.Column"><em>smartcols.Column</em></a>) &#8211; Column</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="smartcols.Table.remove_columns">
+<code class="descname">remove_columns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#smartcols.Table.remove_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes all columns from table.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="smartcols.Table.new_line">
+<code class="descname">new_line</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#smartcols.Table.new_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates new column and adds to table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent</strong> (<a class="reference internal" href="line.html#smartcols.Line" title="smartcols.Line"><em>smartcols.Line</em></a>) &#8211; Parent</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Line</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="line.html#smartcols.Line" title="smartcols.Line">smartcols.Line</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="smartcols.Table.add_line">
+<code class="descname">add_line</code><span class="sig-paren">(</span><em>line</em><span class="sig-paren">)</span><a class="headerlink" href="#smartcols.Table.add_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds line to table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>line</strong> (<a class="reference internal" href="line.html#smartcols.Line" title="smartcols.Line"><em>smartcols.Line</em></a>) &#8211; Line</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="smartcols.Table.remove_lines">
+<code class="descname">remove_lines</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#smartcols.Table.remove_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes all lines from table.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="smartcols.Table.json">
+<code class="descname">json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#smartcols.Table.json" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">JSON dictionary</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">libsmartcols-bindings</a></h1>
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=ignatenkobrain&repo=libsmartcols-bindings&type=watch&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="column.html">Column</a></li>
+<li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbols.html">Symbols</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://git.kernel.org/cgit/utils/util-linux/util-linux.git/">util-linux repo</a></li>
+    
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Igor Gnatenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="_sources/table.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
