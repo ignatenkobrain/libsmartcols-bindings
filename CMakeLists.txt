@@ -6,7 +6,7 @@ foreach (lang "Python"
               "Perl"
               "Lua")
   string (TOUPPER "${lang}" LANG)
-  option (ENABLE_${LANG} "Enable ${lang} interface" OFF)
+  option (ENABLE_${LANG} "Enable ${lang} interface" ON)
 
   if (ENABLE_${LANG})
     message (STATUS " +++ ${lang} bindings enabled")
