@@ -25,6 +25,7 @@
 class Table {
     private:
         struct libscols_table *tb = NULL;
+        char *_name = NULL;
         bool json() const {
             return (bool) scols_table_is_json(this->tb);
         }
@@ -33,8 +34,10 @@ class Table {
         }
 
     public:
-        Table() {
+        Table(const char *name = NULL) {
             this->tb = scols_new_table();
+            if (name != NULL)
+                this->name(name);
         }
         ~Table() {
             scols_unref_table(this->tb);
@@ -61,6 +64,13 @@ class Table {
             HANDLE_RC(scols_print_table(this->tb));
         }
 #endif
+        const char *name() const {
+            return this->_name;
+        }
+        void name(const char *name) {
+            this->_name = strdup(name);
+            HANDLE_RC(scols_table_set_name(this->tb, this->_name));
+        }
         bool ascii() const {
             return (bool) scols_table_is_ascii(this->tb);
         }

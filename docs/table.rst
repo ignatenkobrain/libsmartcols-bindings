@@ -1,7 +1,13 @@
 Table
 =====
 
-.. py:class:: smartcols.Table()
+.. py:class:: smartcols.Table(name=None)
+
+   :param str name: The name of table (:py:attr:`name`)
+
+   .. py:attribute:: name
+
+      Name of the table (for example, used for JSON top level object name).
 
    .. py:attribute:: ascii
 

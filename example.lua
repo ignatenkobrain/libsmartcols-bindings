@@ -3,7 +3,7 @@ require("smartcols")
 name = 0
 age = 1
 
-tb = smartcols.Table()
+tb = smartcols.Table("example")
 
 cl_name = smartcols.Column("NAME", 0.1)
 cl_name.tree = true

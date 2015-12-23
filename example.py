@@ -5,7 +5,7 @@ class Col:
     name = 0
     age = 1
 
-tb = Table()
+tb = Table("example")
 
 cl_name = Column("NAME", 1.9, tree=True)
 tb.add_column(cl_name)
