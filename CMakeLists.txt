@@ -1,6 +1,7 @@
 cmake_minimum_required (VERSION 3.4)
 
-project (libsmartcols-bindings CXX)
+project (libsmartcols-bindings VERSION 0.0.1 LANGUAGES CXX)
+set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 foreach (lang "Python"
               "Perl"
@@ -14,6 +15,7 @@ foreach (lang "Python"
     message (STATUS " --- ${lang} bindings disabled")
   endif ()
 endforeach ()
+option (BUILD_DOCS "Build documentation" ON)
 
 find_package (PkgConfig REQUIRED)
 pkg_check_modules (SCOLS smartcols REQUIRED)
@@ -99,3 +101,7 @@ if (ENABLE_LUA)
   install (TARGETS ${SWIG_MODULE_${target_name}_REAL_NAME}
            DESTINATION ${LUA_INSTALL_DIR})
 endif (ENABLE_LUA)
+
+if (BUILD_DOCS)
+  add_subdirectory (docs)
+endif (BUILD_DOCS)
