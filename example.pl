@@ -16,7 +16,7 @@ $cl_name = new smartcols::Column("NAME", 0.1, tree => true);
 $tb->add_column($cl_name);
 
 $cl_age = $tb->new_column("AGE", 2);
-$cl_age->right(true);
+$cl_age->{right} = true;
 
 print "Enable colors: " . colors_enabled($tb) . "\n";
 $tb->{colors} = 1;
