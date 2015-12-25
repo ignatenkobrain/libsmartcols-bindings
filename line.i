@@ -16,6 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+PROP_RENAME(Line, color, const char *)
+
 %inline %{
 
 class Line {

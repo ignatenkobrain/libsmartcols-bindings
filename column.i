@@ -16,6 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+PROP_RENAME(Column, trunc, bool)
+PROP_RENAME(Column, tree, bool)
+PROP_RENAME(Column, right, bool)
+PROP_RENAME(Column, strict_width, bool)
+PROP_RENAME(Column, noextremes, bool)
+#ifdef FLAGS_HIDDEN
+PROP_RENAME(Column, hidden, bool)
+#endif
+PROP_RENAME(Column, name, const char *)
+PROP_RENAME(Column, hidden, const char *)
+PROP_RENAME(Column, hidden, double)
+
 %inline %{
 
 class Column {

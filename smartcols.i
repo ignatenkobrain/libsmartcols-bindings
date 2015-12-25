@@ -31,6 +31,7 @@
 
 #define PROP_HEADER(class, ...)
 #define PROP(param)
+#define PROP_RENAME(class, param, type)
 #define PROP_FOOTER(class)
 
 #if defined(SWIGPYTHON)
@@ -43,19 +44,10 @@
     %}
 %enddef
 #elif defined(SWIGPERL)
-#undef PROP_HEADER
-%define PROP_HEADER(class, ...)
-    %perlcode %{
-        package smartcols:: ## class;
-    %}
-%enddef
-
-#undef PROP
-%define PROP(param)
-    %perlcode %{
-        *swig_ ## param ## _get = * ## param;
-        *swig_ ## param ## _set = * ## param;
-    %}
+#undef PROP_RENAME
+%define PROP_RENAME(class, param, type)
+    %rename("swig_"#param"_get") class::param;
+    %rename("swig_"#param"_set") class::param(type);
 %enddef
 #elif defined(SWIGLUA)
 #define SWIG_DOSTRING_FAIL(STR)

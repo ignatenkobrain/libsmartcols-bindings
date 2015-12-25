@@ -20,6 +20,13 @@
 %newobject Table::new_line;
 %newobject Table::__json;
 
+PROP_RENAME(Table, ascii, bool)
+PROP_RENAME(Table, colors, bool)
+PROP_RENAME(Table, maxout, bool)
+PROP_RENAME(Table, noheadings, bool)
+PROP_RENAME(Table, column_separator, const char *)
+PROP_RENAME(Table, line_separator, const char *)
+
 %inline %{
 
 class Table {
