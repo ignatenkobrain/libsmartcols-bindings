@@ -28,6 +28,7 @@ Add one of options to build specific languages:
 * Python: `-DENABLE_PYTHON=ON`
 * Perl: `-DENABLE_PERL=ON`
 * Lua: `-DENABLE_LUA=ON`
+* Ruby: `-DENABLE_RUBY=ON`
 
 Forcing python version: `-DPythonLibs_FIND_VERSION=2 -DPythonLibs_FIND_VERSION_MAJOR=2`
 
@@ -39,3 +40,4 @@ Running examples
 * Python: `PYTHONPATH=build/python/ python3 example.py`
 * Perl: `PERL5LIB=build/perl/ perl example.pl`
 * Lua: `LUA_CPATH="$(lua -e 'print(package.cpath)');build/lua/?.so" lua example.lua`
+* Ruby: `RUBYLIB=build/ruby/ ruby example.rb`

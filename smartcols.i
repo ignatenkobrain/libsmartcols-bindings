@@ -77,6 +77,12 @@
         __fixup_ ## class()
     %}
 %enddef
+#elif defined(SWIGRUBY)
+#undef PROP_RENAME
+%define PROP_RENAME(class, param, type)
+    %rename(#param) class::param;
+    %rename("param=") class::param(type);
+%enddef
 #else
 #warning "No property header/footer/etc. for target language"
 #endif

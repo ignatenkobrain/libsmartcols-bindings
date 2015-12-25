@@ -5,7 +5,8 @@ set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 foreach (lang "Python"
               "Perl"
-              "Lua")
+              "Lua"
+              "Ruby")
   string (TOUPPER "${lang}" LANG)
   option (ENABLE_${LANG} "Enable ${lang} interface" ON)
 
@@ -101,6 +102,17 @@ if (ENABLE_LUA)
   install (TARGETS ${SWIG_MODULE_${target_name}_REAL_NAME}
            DESTINATION ${LUA_INSTALL_DIR})
 endif (ENABLE_LUA)
+
+if (ENABLE_RUBY)
+  find_package (Ruby REQUIRED)
+  include_directories (${RUBY_INCLUDE_DIRS})
+  set (LUA_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/ruby)
+  message (STATUS "Ruby installation dir: ${RUBY_INSTALL_DIR}")
+
+  enable_language (ruby "${RUBY_LIBRARY}")
+  set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES PREFIX "")
+  set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES OUTPUT_NAME "smartcols")
+endif (ENABLE_RUBY)
 
 if (BUILD_DOCS)
   add_subdirectory (docs)
