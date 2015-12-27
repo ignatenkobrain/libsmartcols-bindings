@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-%module(docstring="Python API for the util-linux libsmartcols library") smartcols
+%module(docstring="Bindings for the util-linux libsmartcols library") smartcols
 
 %{
 #define SWIG_FILE_WITH_INIT
