@@ -7,7 +7,7 @@ class Col:
 
 tb = Table("example")
 
-cl_name = Column("NAME", 1.9, tree=True)
+cl_name = Column("NAME", 0.1, tree=True)
 tb.add_column(cl_name)
 
 cl_age = tb.new_column("AGE", 2)
