@@ -16,17 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-PROP_RENAME(Column, trunc, bool)
-PROP_RENAME(Column, tree, bool)
-PROP_RENAME(Column, right, bool)
-PROP_RENAME(Column, strict_width, bool)
-PROP_RENAME(Column, noextremes, bool)
+PROPERTY(Column, trunc, bool)
+PROPERTY(Column, tree, bool)
+PROPERTY(Column, right, bool)
+PROPERTY(Column, strict_width, bool)
+PROPERTY(Column, noextremes, bool)
 #ifdef FLAGS_HIDDEN
-PROP_RENAME(Column, hidden, bool)
+PROPERTY(Column, hidden, bool)
 #endif
-PROP_RENAME(Column, name, const char *)
-PROP_RENAME(Column, color, const char *)
-PROP_RENAME(Column, whint, double)
+PROPERTY(Column, name, const char *)
+PROPERTY(Column, color, const char *)
+PROPERTY(Column, whint, double)
 
 %inline %{
 
@@ -129,23 +129,3 @@ class Column {
 };
 
 %}
-
-%extend Column {
-PROP_HEADER(Column, "")
-
-PROP(trunc)
-PROP(tree)
-PROP(right)
-PROP(strict_width)
-PROP(noextremes)
-
-#ifdef FLAGS_HIDDEN
-PROP(hidden)
-#endif
-
-PROP(name)
-PROP(color)
-PROP(whint)
-
-PROP_FOOTER(Column)
-}

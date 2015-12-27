@@ -20,12 +20,12 @@
 %newobject Table::new_line;
 %newobject Table::__json;
 
-PROP_RENAME(Table, ascii, bool)
-PROP_RENAME(Table, colors, bool)
-PROP_RENAME(Table, maxout, bool)
-PROP_RENAME(Table, noheadings, bool)
-PROP_RENAME(Table, column_separator, const char *)
-PROP_RENAME(Table, line_separator, const char *)
+PROPERTY(Table, ascii, bool)
+PROPERTY(Table, colors, bool)
+PROPERTY(Table, maxout, bool)
+PROPERTY(Table, noheadings, bool)
+PROPERTY(Table, column_separator, const char *)
+PROPERTY(Table, line_separator, const char *)
 
 %inline %{
 
@@ -149,10 +149,7 @@ class Table {
 %}
 
 %extend Table {
-PROP_HEADER(Table)
-
-PROP(ascii)
-PROP(colors)
+EXT_HEADER(Table)
 
 #if defined(SWIGLUA)
     %luacode %{
@@ -181,10 +178,5 @@ PROP(colors)
 #warning "No json() for target language"
 #endif
 
-PROP(maxout)
-PROP(noheadings)
-PROP(column_separator)
-PROP(line_separator)
-
-PROP_FOOTER(Table)
+EXT_FOOTER(Table)
 }

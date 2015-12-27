@@ -16,9 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-PROP_RENAME(Symbols, branch, const char *)
-PROP_RENAME(Symbols, right, const char *)
-PROP_RENAME(Symbols, vertical, const char *)
+PROPERTY(Symbols, branch, const char *)
+PROPERTY(Symbols, right, const char *)
+PROPERTY(Symbols, vertical, const char *)
 
 %inline %{
 
@@ -62,13 +62,3 @@ public:
 };
 
 %}
-
-%extend Symbols {
-PROP_HEADER(Symbols)
-
-PROP(branch)
-PROP(right)
-PROP(vertical)
-
-PROP_FOOTER(Symbols)
-}

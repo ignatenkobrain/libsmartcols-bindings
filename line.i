@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-PROP_RENAME(Line, color, const char *)
+PROPERTY(Line, color, const char *)
 
 %inline %{
 
@@ -49,11 +49,3 @@ public:
 };
 
 %}
-
-%extend Line {
-PROP_HEADER(Line)
-
-PROP(color)
-
-PROP_FOOTER(Line)
-}

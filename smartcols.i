@@ -29,31 +29,22 @@
 #endif
 %}
 
-#define PROP_HEADER(class, ...)
-#define PROP(param)
-#define PROP_RENAME(class, param, type)
-#define PROP_FOOTER(class)
+%include "attribute.i"
 
-#if defined(SWIGPYTHON)
-#undef PROP
-%define PROP(param)
-    %pythoncode %{
-        __swig_getmethods__[#param] = param
-        __swig_setmethods__[#param] = param
-        if _newclass: param = property(param, param)
-    %}
+#define EXT_HEADER(class, ...)
+#define EXT_FOOTER(class)
+
+%define PROPERTY(class, param, type)
+    /* Suppress warnings from redefining function to variables */
+    %warnfilter(302) class::param;
+    %attribute(class, type, param, param, param)
 %enddef
-#elif defined(SWIGPERL)
-#undef PROP_RENAME
-%define PROP_RENAME(class, param, type)
-    %rename("swig_"#param"_get") class::param;
-    %rename("swig_"#param"_set") class::param(type);
-%enddef
-#elif defined(SWIGLUA)
+
+#if defined(SWIGLUA)
 #define SWIG_DOSTRING_FAIL(STR)
 
-#undef PROP_HEADER
-%define PROP_HEADER(class, ...)
+#undef EXT_HEADER
+%define EXT_HEADER(class, ...)
     %luacode %{
         function __fixup_ ## class()
             local obj = smartcols. ## class(## __VA_ARGS__)
@@ -61,30 +52,13 @@
     %}
 %enddef
 
-#undef PROP
-%define PROP(param)
-    %luacode %{
-        __ ## param = obj. ## param
-        mt[".get"][#param] = __ ## param
-        mt[".set"][#param] = __ ## param
-    %}
-%enddef
-
-#undef PROP_FOOTER
-%define PROP_FOOTER(class)
+#undef EXT_FOOTER
+%define EXT_FOOTER(class)
     %luacode %{
         end
         __fixup_ ## class()
     %}
 %enddef
-#elif defined(SWIGRUBY)
-#undef PROP_RENAME
-%define PROP_RENAME(class, param, type)
-    %rename(#param) class::param;
-    %rename("param=") class::param(type);
-%enddef
-#else
-#warning "No property header/footer/etc. for target language"
 #endif
 
 %include "exception.i"
