@@ -66,11 +66,6 @@ class Table {
             this->json(false);
             return data;
         }
-#if !defined(SWIGPYTHON) && !defined(SWIGLUA)
-        void print() {
-            HANDLE_RC(scols_print_table(this->tb));
-        }
-#endif
         const char *name() const {
             return this->_name;
         }
