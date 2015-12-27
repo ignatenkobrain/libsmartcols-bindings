@@ -13,6 +13,7 @@ Requirements
 Optional requirements for `json()` function support:
 * Perl: [perl-JSON](http://search.cpan.org/dist/JSON/)
 * Lua: [lua-json](http://luaforge.net/projects/luajson/)
+* Ruby: [rubygem-json](https://rubygems.org/gems/json)
 
 Building
 --------
@@ -40,4 +41,4 @@ Running examples
 * Python: `PYTHONPATH=build/python/ python3 example.py`
 * Perl: `PERL5LIB=build/perl/ perl example.pl`
 * Lua: `LUA_CPATH="$(lua -e 'print(package.cpath)');build/lua/?.so" lua example.lua`
-* Ruby: `RUBYLIB=build/ruby/ ruby example.rb`
+* Ruby: `RUBYLIB="ruby/:build/ruby/" ruby example.rb`

@@ -37,7 +37,8 @@ macro (enable_language LANG LIBRARIES)
   swig_add_module (${target_name} ${LANG} ${SWIG_INPUT})
   swig_link_libraries (${target_name} ${LIBRARIES} ${SCOLS_LIBRARIES})
   target_compile_features (${SWIG_MODULE_${target_name}_REAL_NAME} PRIVATE cxx_nonstatic_member_init)
-  set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${LANG}")
+  # ARGV2 is an additional tree output directory (e.g. used in Ruby for customizing module with Ruby code)
+  set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${LANG}/${ARGV2}")
 
   set (ADD_FLAGS CACHE INTERNAL "" FORCE)
   if (FLAGS_HIDDEN)
@@ -106,15 +107,19 @@ endif (ENABLE_LUA)
 if (ENABLE_RUBY)
   find_package (Ruby REQUIRED)
   include_directories (${RUBY_INCLUDE_DIRS})
-  set (RUBY_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/ruby/vendor_ruby)
-  message (STATUS "Ruby installation dir: ${RUBY_INSTALL_DIR}")
+  set (RUBY_LIB_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/ruby/vendor_ruby/smartcols)
+  set (RUBY_MOD_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/share/ruby/vendor_ruby)
+  message (STATUS "Ruby library installation dir: ${RUBY_LIB_INSTALL_DIR}")
+  message (STATUS "Ruby module installation dir: ${RUBY_MOD_INSTALL_DIR}")
 
-  enable_language (ruby "${RUBY_LIBRARY}")
+  enable_language (ruby "${RUBY_LIBRARY}" "smartcols")
   set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES PREFIX "")
   set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES OUTPUT_NAME "smartcols")
 
   install (TARGETS ${SWIG_MODULE_${target_name}_REAL_NAME}
-           DESTINATION ${RUBY_INSTALL_DIR})
+           DESTINATION ${RUBY_LIB_INSTALL_DIR})
+  install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/ruby/smartcols.rb
+           DESTINATION ${RUBY_MOD_INSTALL_DIR})
 endif (ENABLE_RUBY)
 
 if (BUILD_DOCS)

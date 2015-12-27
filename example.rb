@@ -37,5 +37,5 @@ ln = tb.new_line(gdad)
 ln.set_data(Col::Name, "Aunt Gaga")
 ln.set_data(Col::Age, "35")
 
-#print tb.json()
+print tb.json(), "\n"
 print tb
