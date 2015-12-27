@@ -42,5 +42,5 @@ $ln = $tb->new_line($gdad);
 $ln->set_data(name, "Aunt Gaga");
 $ln->set_data(age, "35");
 
-print JSON->new->pretty->encode($tb->json()) . "\n";
+print JSON->new->encode($tb->json()) . "\n";
 $tb->print();
