@@ -25,8 +25,8 @@ PROP_RENAME(Column, noextremes, bool)
 PROP_RENAME(Column, hidden, bool)
 #endif
 PROP_RENAME(Column, name, const char *)
-PROP_RENAME(Column, hidden, const char *)
-PROP_RENAME(Column, hidden, double)
+PROP_RENAME(Column, color, const char *)
+PROP_RENAME(Column, whint, double)
 
 %inline %{
 
