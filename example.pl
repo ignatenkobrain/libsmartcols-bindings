@@ -12,11 +12,11 @@ sub colors_enabled {
     return $tb->{colors} ? "True" : "False";
 }
 
-$cl_name = new smartcols::Column("NAME", 0.1, tree => true);
+$cl_name = new smartcols::Column("NAME", 0.1, tree => 1);
 $tb->add_column($cl_name);
 
 $cl_age = $tb->new_column("AGE", 2);
-$cl_age->{right} = true;
+$cl_age->{right} = 1;
 
 print "Enable colors: " . colors_enabled($tb) . "\n";
 $tb->{colors} = 1;
