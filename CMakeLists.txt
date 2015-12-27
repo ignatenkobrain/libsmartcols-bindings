@@ -106,12 +106,15 @@ endif (ENABLE_LUA)
 if (ENABLE_RUBY)
   find_package (Ruby REQUIRED)
   include_directories (${RUBY_INCLUDE_DIRS})
-  set (LUA_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/ruby)
+  set (RUBY_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/ruby)
   message (STATUS "Ruby installation dir: ${RUBY_INSTALL_DIR}")
 
   enable_language (ruby "${RUBY_LIBRARY}")
   set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES PREFIX "")
   set_target_properties (${SWIG_MODULE_${target_name}_REAL_NAME} PROPERTIES OUTPUT_NAME "smartcols")
+
+  install (TARGETS ${SWIG_MODULE_${target_name}_REAL_NAME}
+           DESTINATION ${RUBY_INSTALL_DIR})
 endif (ENABLE_RUBY)
 
 if (BUILD_DOCS)
