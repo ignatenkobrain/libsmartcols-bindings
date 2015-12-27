@@ -38,5 +38,6 @@ ln = tb:new_line(gdad)
 ln:set_data(name, "Aunt Gaga")
 ln:set_data(age, "35")
 
-print(tb:json())
+local json = require('json')
+print(json.encode(tb:json()))
 print(tb)

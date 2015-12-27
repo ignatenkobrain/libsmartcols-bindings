@@ -155,7 +155,7 @@ EXT_HEADER(Table)
     %luacode %{
         function smartcols.Table:__tojson()
             local json = require('json')
-            return json.encode(json.decode(self:__json()))
+            return json.decode(self:__json())
         end
         mt[".fn"]["json"] = smartcols.Table.__tojson
     %}
