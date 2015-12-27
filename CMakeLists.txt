@@ -106,7 +106,7 @@ endif (ENABLE_LUA)
 if (ENABLE_RUBY)
   find_package (Ruby REQUIRED)
   include_directories (${RUBY_INCLUDE_DIRS})
-  set (RUBY_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/ruby)
+  set (RUBY_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/ruby/vendor_ruby)
   message (STATUS "Ruby installation dir: ${RUBY_INSTALL_DIR}")
 
   enable_language (ruby "${RUBY_LIBRARY}")
