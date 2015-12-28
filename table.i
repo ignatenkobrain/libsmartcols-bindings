@@ -20,6 +20,16 @@
 %newobject Table::new_line;
 %newobject Table::__json;
 
+#if defined(SWIGPYTHON)
+    %pythonprepend Table::__json %{
+        from json import loads
+    %}
+    %pythonappend Table::__json %{
+        val = loads(val)
+    %}
+    %rename("json") Table::__json;
+#endif
+
 PROPERTY(Table, ascii, bool)
 PROPERTY(Table, colors, bool)
 PROPERTY(Table, maxout, bool)
@@ -155,12 +165,6 @@ EXT_HEADER(Table)
         end
         mt[".fn"]["json"] = smartcols.Table.__tojson
     %}
-#elif defined(SWIGPYTHON)
-    %pythoncode %{
-        def json(self):
-            from json import loads
-            return loads(self.__json())
-    %}
 #elif defined(SWIGPERL)
     %perlcode %{
         sub json {
@@ -170,8 +174,6 @@ EXT_HEADER(Table)
             return $json;
         }
     %}
-#else
-#warning "No json() for target language"
 #endif
 
 EXT_FOOTER(Table)
