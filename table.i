@@ -47,6 +47,7 @@ class Table {
                 this->name(name);
         }
         ~Table() {
+            free(this->_name);
             scols_unref_table(this->tb);
         }
         char *__str__() {

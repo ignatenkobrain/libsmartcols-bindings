@@ -33,6 +33,9 @@ public:
         this->sm = scols_new_symbols();
     }
     ~Symbols() {
+        free(this->_branch);
+        free(this->_right);
+        free(this->_vertical);
         scols_unref_symbols(this->sm);
     }
 
