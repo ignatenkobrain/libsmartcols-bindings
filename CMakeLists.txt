@@ -28,6 +28,19 @@ include (${SWIG_USE_FILE})
 include (CheckCXXSymbolExists)
 check_cxx_symbol_exists (SCOLS_FL_HIDDEN libmsartcols.h FLAGS_HIDDEN)
 
+# We need to have some hack otherwise program will crash sometimes
+# https://github.com/karelzak/util-linux/commit/5e8461a53a11b2ed4d4e14a9e912bfad02cb7287
+try_run (SCOLS_OLDSTREAM_HACK_RUN SCOLS_OLDSTREAM_HACK_COMPILE
+         ${CMAKE_BINARY_DIR}
+         ${CMAKE_CURRENT_SOURCE_DIR}/cmake/oldstream_hack.cc
+         CMAKE_FLAGS
+           -DINCLUDE_DIRECTORIES:STRING=${SCOLS_INCLUDE_DIRS}
+           -DLINK_LIBRARIES:STRING=${SCOLS_LIBRARIES}
+         COMPILE_OUTPUT_VARIABLE SCOLS_OLDSTREAM_HACK_COMPILE_OUTPUT)
+if (NOT SCOLS_OLDSTREAM_HACK_COMPILE)
+  message (FATAL_ERROR "Compilation of test for oldstream hack failed. Look at CMakeError.log")
+endif ()
+
 set (SWIG_INPUT "${CMAKE_SOURCE_DIR}/smartcols.i")
 set_source_files_properties (${SWIG_INPUT} PROPERTIES CPLUSPLUS ON)
 
@@ -47,10 +60,7 @@ macro (enable_language LANG LIBRARIES)
   if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     set (ADD_FLAGS "${ADD_FLAGS} -DDEBUG")
   endif ()
-  # We need to have some hack till 2.28, otherwise program will crash sometimes
-  # https://github.com/karelzak/util-linux/commit/5e8461a53a11b2ed4d4e14a9e912bfad02cb7287
-  pkg_check_modules (SCOLS_OLDSTREAM smartcols>=2.28 QUIET)
-  if (NOT SCOLS_OLDSTREAM_FOUND)
+  if (SCOLS_OLDSTREAM_HACK_RUN)
     set (ADD_FLAGS "${ADD_FLAGS} -DOLDSTREAM_HACK")
   endif ()
 
