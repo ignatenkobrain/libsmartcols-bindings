@@ -1,6 +1,6 @@
 /* line.i
  *
- * Copyright (C) 2015 Igor Gnatenko <i.gnatenko.brain@gmail.com>
+ * Copyright (C) 2015-2016 Igor Gnatenko <i.gnatenko.brain@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,8 +43,11 @@ class Line {
             HANDLE_RC(scols_line_set_color(this->ln, color));
         }
 
-        void set_data(int column, const char *data) {
+        void __setitem__(int column, const char *data) {
             HANDLE_RC(scols_line_set_data(this->ln, column, data));
+        }
+        void set_data(int column, const char *data) {
+            this->__setitem__(column, data);
         }
 };
 
