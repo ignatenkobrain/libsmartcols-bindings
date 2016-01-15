@@ -26,19 +26,17 @@ find_package (SWIG REQUIRED)
 include (${SWIG_USE_FILE})
 
 include (CheckCXXSymbolExists)
-check_cxx_symbol_exists (SCOLS_FL_HIDDEN libmsartcols.h FLAGS_HIDDEN)
-
-# We need to have some hack otherwise program will crash sometimes
-# https://github.com/karelzak/util-linux/commit/5e8461a53a11b2ed4d4e14a9e912bfad02cb7287
-try_run (SCOLS_OLDSTREAM_HACK_RUN SCOLS_OLDSTREAM_HACK_COMPILE
-         ${CMAKE_BINARY_DIR}
-         ${CMAKE_CURRENT_SOURCE_DIR}/cmake/oldstream_hack.cc
-         CMAKE_FLAGS
-           -DINCLUDE_DIRECTORIES:STRING=${SCOLS_INCLUDE_DIRS}
-           -DLINK_LIBRARIES:STRING=${SCOLS_LIBRARIES}
-         COMPILE_OUTPUT_VARIABLE SCOLS_OLDSTREAM_HACK_COMPILE_OUTPUT)
-if (NOT SCOLS_OLDSTREAM_HACK_COMPILE)
-  message (FATAL_ERROR "Compilation of test for oldstream hack failed. Look at CMakeError.log")
+include (CheckTypeSize)
+set (CMAKE_REQUIRED_INCLUDES ${SCOLS_INCLUDE_DIRS})
+set (CMAKE_REQUIRED_LIBRARIES ${SCOLS_LIBRARIES})
+set (CMAKE_EXTRA_INCLUDE_FILES "libsmartcols.h")
+check_type_size ("SCOLS_FL_HIDDEN" FLAGS_HIDDEN LANGUAGE CXX)
+if (NOT FLAGS_HIDDEN)
+  message (FATAL_ERROR "SCOLS_FL_HIDDEN is not supported")
+endif ()
+check_cxx_symbol_exists (scols_line_set_column_data libsmartcols.h SET_COLUMN_DATA)
+if (NOT FLAGS_HIDDEN)
+  message (FATAL_ERROR "scols_line_set_column_data() is not supported")
 endif ()
 
 set (SWIG_INPUT "${CMAKE_SOURCE_DIR}/smartcols.i")

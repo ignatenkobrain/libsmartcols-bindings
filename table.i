@@ -1,6 +1,6 @@
 /* table.i
  *
- * Copyright (C) 2015 Igor Gnatenko <i.gnatenko.brain@gmail.com>
+ * Copyright (C) 2015-2016 Igor Gnatenko <i.gnatenko.brain@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -62,13 +62,7 @@ class Table {
         }
         char *__str__() {
             char *data = NULL;
-#ifdef OLDSTREAM_HACK
-            FILE *oldstream = scols_table_get_stream(this->tb);
-#endif
             HANDLE_RC(scols_print_table_to_string(this->tb, &data));
-#ifdef OLDSTREAM_HACK
-            scols_table_set_stream(this->tb, oldstream);
-#endif
             return data;
         }
         char *__json() {

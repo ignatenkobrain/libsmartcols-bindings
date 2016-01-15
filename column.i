@@ -1,6 +1,6 @@
 /* column.i
  *
- * Copyright (C) 2015 Igor Gnatenko <i.gnatenko.brain@gmail.com>
+ * Copyright (C) 2015-2016 Igor Gnatenko <i.gnatenko.brain@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,9 +21,7 @@ PROPERTY(Column, tree, bool)
 PROPERTY(Column, right, bool)
 PROPERTY(Column, strict_width, bool)
 PROPERTY(Column, noextremes, bool)
-#ifdef FLAGS_HIDDEN
 PROPERTY(Column, hidden, bool)
-#endif
 PROPERTY(Column, name, const char *)
 PROPERTY(Column, color, const char *)
 PROPERTY(Column, whint, double)
@@ -52,9 +50,7 @@ class Column {
             this->right(right);
             this->strict_width(strict_width);
             this->noextremes(noextremes);
-#ifdef FLAGS_HIDDEN
             this->hidden(hidden);
-#endif
         }
         ~Column() {
             scols_unref_column(this->cl);
@@ -98,14 +94,13 @@ class Column {
             this->set_flag(SCOLS_FL_NOEXTREMES, v);
         }
 
-#ifdef FLAGS_HIDDEN
         bool hidden() const {
             return (bool) scols_column_is_hidden(this->cl);
         }
         void hidden(bool v) {
             this->set_flag(SCOLS_FL_HIDDEN, v);
         }
-#endif
+
         const char *name() const {
             return scols_cell_get_data(scols_column_get_header(this->cl));
         }
