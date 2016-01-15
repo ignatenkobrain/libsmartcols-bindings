@@ -13,5 +13,5 @@ Line
 
       Set data for cell which reffering to the column.
 
-      :param int column: Column number
+      :param smartcols.Column column: Column
       :param str data: Data
