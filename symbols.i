@@ -1,6 +1,6 @@
 /* symbols.i
  *
- * Copyright (C) 2015 Igor Gnatenko <i.gnatenko.brain@gmail.com>
+ * Copyright (C) 2015-2016 Igor Gnatenko <i.gnatenko.brain@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,45 +23,45 @@ PROPERTY(Symbols, vertical, const char *)
 %inline %{
 
 class Symbols {
-private:
-    struct libscols_symbols *sm = NULL;
-    char *_branch = NULL;
-    char *_right = NULL;
-    char *_vertical = NULL;
-public:
-    Symbols() {
-        this->sm = scols_new_symbols();
-    }
-    ~Symbols() {
-        free(this->_branch);
-        free(this->_right);
-        free(this->_vertical);
-        scols_unref_symbols(this->sm);
-    }
+    private:
+        struct libscols_symbols *sm = NULL;
+        char *_branch = NULL;
+        char *_right = NULL;
+        char *_vertical = NULL;
+    public:
+        Symbols() {
+            this->sm = scols_new_symbols();
+        }
+        ~Symbols() {
+            free(this->_branch);
+            free(this->_right);
+            free(this->_vertical);
+            scols_unref_symbols(this->sm);
+        }
 
-    const char *branch() const {
-        return this->_branch;
-    }
-    void branch(const char *branch) {
-        this->_branch = strdup(branch);
-        HANDLE_RC(scols_symbols_set_branch(this->sm, this->_branch));
-    }
+        const char *branch() const {
+            return this->_branch;
+        }
+        void branch(const char *branch) {
+            this->_branch = strdup(branch);
+            HANDLE_RC(scols_symbols_set_branch(this->sm, this->_branch));
+        }
 
-    const char *right() const {
-        return this->_right;
-    }
-    void right(const char *right) {
-        this->_right = strdup(right);
-        HANDLE_RC(scols_symbols_set_right(this->sm, this->_right));
-    }
+        const char *right() const {
+            return this->_right;
+        }
+        void right(const char *right) {
+            this->_right = strdup(right);
+            HANDLE_RC(scols_symbols_set_right(this->sm, this->_right));
+        }
 
-    const char *vertical() const {
-        return this->_vertical;
-    }
-    void vertical(const char *vertical) {
-        this->_vertical = strdup(vertical);
-        HANDLE_RC(scols_symbols_set_vertical(this->sm, this->_vertical));
-    }
+        const char *vertical() const {
+            return this->_vertical;
+        }
+        void vertical(const char *vertical) {
+            this->_vertical = strdup(vertical);
+            HANDLE_RC(scols_symbols_set_vertical(this->sm, this->_vertical));
+        }
 };
 
 %}
