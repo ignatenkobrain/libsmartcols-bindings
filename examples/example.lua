@@ -17,6 +17,7 @@ gdad = tb:new_line()
 ln = gdad
 ln[cl_name] = "Grandfather Bob"
 ln[cl_age] = "63"
+ln[cl_age].color = "red"
 
 dad = tb:new_line(ln)
 ln = dad

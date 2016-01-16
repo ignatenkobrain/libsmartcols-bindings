@@ -43,6 +43,17 @@ class Line {
             HANDLE_RC(scols_line_set_color(this->ln, color));
         }
 
+        const Cell __getitem__(int column) const {
+            Cell cell;
+            cell._cell = scols_line_get_cell(this->ln, column);
+            return cell;
+        }
+        const Cell __getitem__(Column *column) const {
+            Cell cell;
+            cell._cell = scols_line_get_column_cell(this->ln, column->get_struct());
+            return cell;
+        }
+
         void __setitem__(int column, const char *data) {
             HANDLE_RC(scols_line_set_data(this->ln, column, data));
         }

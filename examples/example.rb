@@ -15,6 +15,7 @@ print "Enable colors: ", tb.colors, "\n"
 ln = gdad = tb.new_line()
 ln[cl_name] = "Grandfather Bob"
 ln[cl_age] = "61"
+ln[cl_age].color = "red"
 
 ln = dad = tb.new_line(ln)
 ln.set_data(cl_name, "Father Adam")

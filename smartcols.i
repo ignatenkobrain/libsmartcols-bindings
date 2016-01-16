@@ -79,6 +79,8 @@
 %newobject *::__str__;
 %typemap(newfree) char * "free($1);";
 
+%include "cell.i"
+
 %nodefaultctor;
 %nodefaultdtor;
 
