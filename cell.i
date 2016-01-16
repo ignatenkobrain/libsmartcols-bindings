@@ -19,6 +19,11 @@
 PROPERTY(Cell, data, const char *)
 PROPERTY(Cell, color, const char *)
 
+#ifdef SWIGPERL
+/* TODO: remove this renaming. Now it makes perl crash */
+%rename("str") Cell::__str__;
+#endif
+
 %inline %{
 
 class Cell {
