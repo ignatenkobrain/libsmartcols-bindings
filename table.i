@@ -30,6 +30,7 @@
     %rename("json") Table::__json;
 #endif
 
+PROPERTY(Table, name, const char *)
 PROPERTY(Table, ascii, bool)
 PROPERTY(Table, colors, bool)
 PROPERTY(Table, maxout, bool)
