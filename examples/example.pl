@@ -20,6 +20,7 @@ print "Enable colors: " . colors_enabled($tb) . "\n";
 $ln = $gdad = $tb->new_line();
 $ln->set_data($cl_name, "Grandfather Bob");
 $ln->set_data($cl_age, "61");
+$ln->get_cell($cl_age)->{color} = "red";
 
 $ln = $dad = $tb->new_line($ln);
 $ln->set_data($cl_name, "Father Adam");

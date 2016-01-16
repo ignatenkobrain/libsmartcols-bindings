@@ -18,6 +18,11 @@
 
 PROPERTY(Line, color, const char *)
 
+#ifdef SWIGPERL
+%rename("get_cell") Line::__getitem__;
+%rename("set_data") Line::__setitem__;
+#endif
+
 %inline %{
 
 class Line {
@@ -57,14 +62,8 @@ class Line {
         void __setitem__(int column, const char *data) {
             HANDLE_RC(scols_line_set_data(this->ln, column, data));
         }
-        void set_data(int column, const char *data) {
-            this->__setitem__(column, data);
-        }
         void __setitem__(Column *column, const char *data) {
             HANDLE_RC(scols_line_set_column_data(this->ln, column->get_struct(), data));
-        }
-        void set_data(Column *column, const char *data) {
-            this->__setitem__(column, data);
         }
 };
 

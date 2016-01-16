@@ -18,16 +18,16 @@ ln[cl_age] = "61"
 ln[cl_age].color = "red"
 
 ln = dad = tb.new_line(ln)
-ln.set_data(cl_name, "Father Adam")
-ln.set_data(cl_age, "38")
+ln[cl_name] = "Father Adam"
+ln[cl_age] = "38"
 
 ln = tb.new_line(dad)
-ln.set_data(cl_name, "Baby Val")
-ln.set_data(cl_age, "9")
+ln[cl_name] = "Baby Val"
+ln[cl_age] = "9"
 
 ln = tb.new_line(dad)
-ln.set_data(cl_name, "Baby Dilbert")
-ln.set_data(cl_age, "5")
+ln[cl_name] = "Baby Dilbert"
+ln[cl_age] = "5"
 
 ln = tb.new_line(gdad)
 ln[0] = "Aunt Gaga"

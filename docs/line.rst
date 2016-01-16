@@ -13,6 +13,9 @@ Line
 
       Set data for cell which reffering to the column.
 
+      .. deprecated:: 0.0.3
+         Use operator `[]` as described in `Set data`_.
+
       :param smartcols.Column column: Column
       :param str data: Data
 
