@@ -133,3 +133,6 @@ endif (ENABLE_RUBY)
 if (BUILD_DOCS)
   add_subdirectory (docs)
 endif (BUILD_DOCS)
+
+enable_testing ()
+add_subdirectory (tests)

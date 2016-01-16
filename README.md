@@ -15,14 +15,15 @@ Optional requirements for `json()` function support:
 * Lua: [lua-json](http://luaforge.net/projects/luajson/)
 * Ruby: [rubygem-json](https://rubygems.org/gems/json)
 
-Building
---------
+Building and running tests
+--------------------------
 
 ```
 $ mkdir build
 $ cd build
 $ cmake ../ -G Ninja
 $ ninja-build
+$ ninja-build test
 ```
 
 Add one of options to build specific languages:
@@ -38,7 +39,7 @@ To init libsmartcols debug when loading module, add: `-DCMAKE_BUILD_TYPE=Debug`
 Running examples
 ----------------
 
-* Python: `PYTHONPATH=build/python/ python3 example.py`
-* Perl: `PERL5LIB=build/perl/ perl example.pl`
-* Lua: `LUA_CPATH="$(lua -e 'print(package.cpath)');build/lua/?.so" lua example.lua`
-* Ruby: `RUBYLIB="ruby/:build/ruby/" ruby example.rb`
+* Python: `PYTHONPATH=build/python/ python3 examples/example.py`
+* Perl: `PERL5LIB=build/perl/ perl examples/example.pl`
+* Lua: `LUA_CPATH="$(lua -e 'print(package.cpath)');build/lua/?.so" lua examples/example.lua`
+* Ruby: `RUBYLIB="ruby/:build/ruby/" ruby examples/example.rb`
