@@ -1,4 +1,5 @@
-from __future__ import print_function
+from __future__ import print_function, unicode_literals
+
 from smartcols import *
 
 if __name__ == "__main__":

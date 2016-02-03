@@ -25,6 +25,10 @@
 #include <smartcolspp.hh>
 %}
 
+%begin %{
+#define SWIG_PYTHON_2_UNICODE
+%}
+
 %init %{
 #ifdef DEBUG
   scols_init_debug(0xffff);
