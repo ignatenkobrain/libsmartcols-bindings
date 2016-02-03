@@ -1,9 +1,11 @@
 Table
 =====
 
-.. py:class:: smartcols.Table(name=None)
+.. py:class:: smartcols.Table()
 
-   :param str name: The name of table (:py:attr:`name`)
+   ..versionchanged:: 0.0.3
+     Removed :py:attr:`name` from constructor, because most of the time it is
+     useless.
 
    .. py:attribute:: name
 
@@ -55,6 +57,9 @@ Table
 
       Removes all columns from table.
 
+      .. deprecated:: 0.0.3
+         De facto it was never working. We will return this function later.
+
    .. py:function:: new_line(parent=None)
 
       Creates new column and adds to table.
@@ -72,6 +77,9 @@ Table
    .. py:function:: remove_lines()
 
       Removes all lines from table.
+
+      .. deprecated:: 0.0.3
+         De facto it was never working. We will return this function later.
 
    .. py:function:: json()
 

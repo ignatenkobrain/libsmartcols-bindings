@@ -18,21 +18,13 @@ class Table(unittest.TestCase):
                              ]
                          })
 
-        table.name = "Test"
-        self.assertEqual(table.json(),
-                         {
-                             "Test": [
-                                 {"name": "Grandfather Bob", "age": "61"}
-                             ]
-                         })
-
         column_name.tree = True
         line = table.new_line(line)
         line[column_name] = "Father Adam"
         line[column_age] = "38"
         self.assertEqual(table.json(),
                          {
-                             "Test": [
+                             "": [
                                  {"name": "Grandfather Bob", "age": "61",
                                   "children": [
                                       {"name": "Father Adam", "age": "38"}

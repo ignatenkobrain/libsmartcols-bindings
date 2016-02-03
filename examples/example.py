@@ -1,7 +1,7 @@
 from __future__ import print_function
 from smartcols import *
 
-tb = Table("example")
+tb = Table()
 
 cl_name = Column("NAME", 0.1, tree=True)
 tb.add_column(cl_name)
