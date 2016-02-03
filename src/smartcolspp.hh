@@ -54,6 +54,8 @@ namespace Smartcols
       void               noextremes   (bool                val);
       bool               hidden       () const;
       void               hidden       (bool                val);
+      bool               wrap         () const;
+      void               wrap         (bool                val);
 
       const std::wstring name         () const;
       void               name         (const std::wstring &wstr);
@@ -93,12 +95,12 @@ namespace Smartcols
 
       struct libscols_symbols *symbols;
 
-      const std::wstring branch   () const;
-      void               branch   (const std::wstring &wstr);
-      const std::wstring right    () const;
-      void               right    (const std::wstring &wstr);
-      const std::wstring vertical () const;
-      void               vertical (const std::wstring &wstr);
+      const std::wstring branch        () const;
+      void               branch        (const std::wstring &wstr);
+      const std::wstring right         () const;
+      void               right         (const std::wstring &wstr);
+      const std::wstring vertical      () const;
+      void               vertical      (const std::wstring &wstr);
 
     private:
       std::wstring branch_;

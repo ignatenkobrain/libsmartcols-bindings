@@ -52,13 +52,14 @@
 /* Column */
 %extend Smartcols::Column {
   Column(const std::wstring &name,
-                 double              whint = -1,
-                 bool                trunc = false,
-                 bool                tree = false,
-                 bool                right = false,
-                 bool                strict_width = false,
-                 bool                noextremes = false,
-                 bool                hidden = false) {
+         double              whint        = -1,
+         bool                trunc        = false,
+         bool                tree         = false,
+         bool                right        = false,
+         bool                strict_width = false,
+         bool                noextremes   = false,
+         bool                hidden       = false,
+         bool                wrap         = false) {
     Smartcols::Column *cl = new Smartcols::Column(name);
     if (whint >= 0)
       cl->whint(whint);
@@ -68,6 +69,7 @@
     cl->strict_width(strict_width);
     cl->noextremes(noextremes);
     cl->hidden(hidden);
+    cl->wrap(wrap);
     return cl;
   }
 }
@@ -77,6 +79,7 @@
 %attribute(Smartcols::Column, bool, strict_width, strict_width, strict_width)
 %attribute(Smartcols::Column, bool, noextremes, noextremes, noextremes)
 %attribute(Smartcols::Column, bool, hidden, hidden, hidden)
+%attribute(Smartcols::Column, bool, wrap, wrap, wrap)
 %attributestring(Smartcols::Column, std::wstring, name, name, name)
 %attributestring(Smartcols::Column, std::string, color, color, color)
 %attribute(Smartcols::Column, double, whint, whint, whint)

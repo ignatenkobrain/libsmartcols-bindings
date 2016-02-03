@@ -1,7 +1,7 @@
 Column
 ======
 
-.. py:class:: smartcols.Column(name, whint=-1, trunc=False, tree=False, right=False, strict_width=False, noextremes=False, hidden=False)
+.. py:class:: smartcols.Column(name, whint=-1, trunc=False, tree=False, right=False, strict_width=False, noextremes=False, hidden=False, wrap=False)
 
    :param str name: The title of column (:py:attr:`name`)
    :param float whint: Width hint of column (:py:attr:`whint`)
@@ -11,6 +11,7 @@ Column
    :param bool strict_width: :py:attr:`strict_width`
    :param bool noextremes: :py:attr:`noextremes`
    :param bool hidden: :py:attr:`hidden`
+   :param bool wrap: :py:attr:`wrap`
 
    .. py:attribute:: trunc
 
@@ -23,6 +24,8 @@ Column
    .. py:attribute:: noextremes
 
    .. py:attribute:: hidden
+
+   .. py:attribute:: wrap
 
    .. py:attribute:: name
 

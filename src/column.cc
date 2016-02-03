@@ -115,6 +115,18 @@ Column::hidden(bool val)
   set_flag(SCOLS_FL_HIDDEN, val);
 }
 
+bool
+Column::wrap() const
+{
+  return (bool) scols_column_is_wrap(column);
+}
+
+void
+Column::wrap(bool val)
+{
+  set_flag(SCOLS_FL_WRAP, val);
+}
+
 const std::wstring
 Column::name() const
 {

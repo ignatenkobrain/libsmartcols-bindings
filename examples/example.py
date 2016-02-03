@@ -5,10 +5,10 @@ from smartcols import *
 if __name__ == "__main__":
     tb = Table()
 
-    cl_name = Column("NAME", 0.1, tree=True)
+    cl_name = Column("NAME", 0.2, tree=True)
     tb.add_column(cl_name)
 
-    cl_age = tb.new_column("AGE", 2)
+    cl_age = tb.new_column("AGE", 0.1)
     cl_age.right = True
 
     print("Enable colors:", tb.colors)
