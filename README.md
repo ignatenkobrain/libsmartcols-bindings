@@ -1,6 +1,8 @@
 Bindings for libsmartcols
 =========================
 
+**DEPRECATED** We wanted to drop dependency from libstdc++ and because we anyway support only Python now it's better to drop usage of SWIG also. [python-smartcols](https://github.com/ignatenkobrain/python-smartcols)
+
 Build Requirements
 ------------------
 
